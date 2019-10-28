@@ -1,3 +1,8 @@
 FROM python:3.7
-RUN pip install Flask
-CMD ["python3", "/flaskapp/app.py"]
+RUN adduser flaskuser
+ADD requirments.txt /tmp
+WORKDIR /tmp
+RUN pip install -r requirments.txt
+WORKDIR /
+USER flaskuser
+CMD ["python3", "/home/flaskuser/app.py"]
